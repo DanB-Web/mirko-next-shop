@@ -1,6 +1,15 @@
+/*
+Option 1a - Fetch data server side with getStaticProps
+THIS WILL RUN AT BUILD TIME ONLY - FASTER / FEWER REQUESTS / WILL NOT PICK UP CMS CHANGES
+*/
+
+/*
+NOTE NEXT SUPPLIES FETCH WITHIN THE SERVER ENVIRONMENT (i.e. node-fetch via npm)
+*/
+
 import Head from 'next/head'
-import Link from 'next/link'
 import Title from '../components/Title'
+
 import { getProducts } from '../lib/products'
 
 export const getStaticProps = async () => {
@@ -8,9 +17,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       products
-    },
-    //USING process.env TO HAVE SHORTER REVALIDATE TIME IN DEV MODE
-    revalidate: parseInt(process.env.REVALIDATE_SECONDS)  
+    }
   }
 }
 
@@ -23,13 +30,11 @@ const HomePage = ({ products }) => {
       </Head>
       <main className='px-6 py-4'>
         <Title>Next Shop</Title>
+        <p className='py-4'>Server Side Rendering with useStaticProps</p>
         <ul>
           {products.map(product => (
             <li key={product.id}>
-            <Link href={`/products/${product.id}`}>
-              <a>{product.title}</a>
-            </Link>
-              
+              {product.title}
             </li>
           ))}
         </ul>
