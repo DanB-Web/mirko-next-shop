@@ -4,6 +4,8 @@ import Title from '../../components/Title'
 import { ApiError } from '../../lib/api'
 import { getProducts, getProduct } from '../../lib/products'
 
+//GIT BRANCH CHECK
+
 //GENERATE [id] PARAMETERS AND PASS TO getStaticProps
 export const getStaticPaths = async () => {
   const products = await getProducts()
